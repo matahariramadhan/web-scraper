@@ -61,18 +61,19 @@ class ShamelaScraper(Fetcher):
 
     def save_to_xml(self, output_path: str, output_filename: str = 'result.xml'):
         root = ET.Element('shamela')
+        page = ET.SubElement(root, 'page')
 
-        ET.SubElement(root, 'page_number').text = self.page_number
+        ET.SubElement(page, 'page_number').text = self.page_number
 
-        fihris = ET.SubElement(root, 'fihris')
+        fihris = ET.SubElement(page, 'fihris')
         for i, f in enumerate(self.fihris):
             ET.SubElement(fihris, str(i+1)).text = self.fihris[i]
 
-        nass = ET.SubElement(root, 'nass')
+        nass = ET.SubElement(page, 'nass')
         for i, n in enumerate(self.nass):
             ET.SubElement(nass, str(i+1)).text = self.nass[i]
 
-        hamesh = ET.SubElement(root, 'hamesh')
+        hamesh = ET.SubElement(page, 'hamesh')
         for i, h in enumerate(self.hamesh):
             ET.SubElement(hamesh, str(i+1)).text = self.hamesh[i]
 
