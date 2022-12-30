@@ -4,16 +4,21 @@ from bs4 import BeautifulSoup
 
 
 class Fetcher:
-    def __init__(self) -> None:
+    '''Fetch raw html from internet or local'''
+
+    def fetch_from_internet(self, url) -> bytes:
+        '''Return raw bytes of html from internet'''
+        self.markup = requests.get(url).content
+        return self.markup
+
+    def fetch_from_local(self, path: str) -> bytes:
+        '''Return raw bytes of html from local'''
         pass
 
-    def extract_raw_html(self, url: str) -> bytes:
-        '''Extract raw bytes of html'''
-        return requests.get(url).content
-
     def extract_html(self, output_path: str, output_filename: str = 'result.html') -> None:
-        '''Save html to output_path to output_filename (result.html by default)'''
-        raw_html = self.extract_raw_html()
-        html = BeautifulSoup(raw_html, 'html.parser').prettify()
-        with open(str(pathlib.Path(output_path).resolve())+'/'+output_filename, 'w') as file:
+        '''Save html to output_path/output_filename.html (result.html by default)
+
+        The result is sanitize with beautiful soup html parser'''
+        html = BeautifulSoup(self.markup, 'html.parser').prettify()
+        with pathlib.Path(output_path+'/'+output_filename).open('w') as file:
             file.write(html)
