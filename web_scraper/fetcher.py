@@ -8,8 +8,8 @@ class Fetcher:
 
     def fetch_from_internet(self, url) -> bytes:
         '''Return raw bytes of html from internet'''
-        self.markup = requests.get(url).content
-        return self.markup
+
+        return requests.get(url).content
 
     def fetch_from_local(self, path: str) -> bytes:
         '''Return raw bytes of html from local'''
