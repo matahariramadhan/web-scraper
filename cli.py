@@ -1,15 +1,13 @@
 import pathlib
-from web_scraper import ShamelaScraper as Shamela
-from web_scraper import Fetcher
-import time
+from web_scraper import Parser, ShamelaParser, Fetcher, XMLSaver, Scraper
 from tqdm import trange
 
 
 def scrape(output_path: str):
-    base_url = 'https://shamela.ws/book/23599/612'
-    shamela = Shamela()
+    url = 'https://shamela.ws/book/23599/612'
+    scraper = Scraper(Fetcher, ShamelaParser, XMLSaver(output_path))
 
-    shamela.parse_from_url(base_url).save_to_xml(output_path)
+    scraper.fetch_from_internet(url).parse_content().save()
 
 
 if __name__ == '__main__':
