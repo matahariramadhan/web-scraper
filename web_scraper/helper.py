@@ -1,4 +1,4 @@
-def convert_list_to_dict(datas: list):
+def list_to_hierarchical_dict(datas: list):
     '''Convert list to hierarchical dictionary'''
 
     def recursive(data):

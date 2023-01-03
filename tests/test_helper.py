@@ -1,5 +1,5 @@
 import pytest
-from web_scraper.helper import convert_list_to_dict
+from web_scraper.helper import list_to_hierarchical_dict
 
 
 @pytest.fixture
@@ -8,7 +8,7 @@ def data():
 
 
 def test_convert_list_to_dict(data):
-    actual = convert_list_to_dict(data)
+    actual = list_to_hierarchical_dict(data)
     expected = {
         'a': {
             'b': {
