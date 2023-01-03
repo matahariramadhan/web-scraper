@@ -12,13 +12,9 @@ class Saver(ABC):
 
 class XMLSaver(Saver):
 
-    def __init__(self, content: dict, root: str = 'scraper') -> None:
-        self.content = content
-        self.root = root
-
-    def save(self, output_path: str, output_filename: str = 'result.xml'):
-        root = ET.Element(self.root)
-        root = dict_to_xml(self.content, root)
+    def save(self, content: dict, output_path: str, output_filename: str = 'result.xml', root: str = 'scraper'):
+        root = ET.Element(root)
+        root = dict_to_xml(content, root)
         tree = ET.ElementTree(root)
         with open(str(pathlib.Path(output_path).resolve())+'/'+output_filename, 'wb') as file:
             tree.write(file, encoding='utf-8')

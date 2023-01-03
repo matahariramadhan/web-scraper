@@ -7,7 +7,7 @@ class Scraper:
     def __init__(self, fetcher: Fetcher, parser: Parser, saver: Saver) -> None:
         self.fetcher = fetcher
         self.parser = parser
-        self.saver = None
+        self.saver = saver
         self.markup: bytes | str = bytes()
         self.content: dict = {}
 
@@ -24,7 +24,7 @@ class Scraper:
         return self
 
     def save(self, output_path: str, output_filename='result.xml') -> None:
-        if self.saver == None:
-            raise Exception(
-                'Dependency injection error, please instantiate saver object first')
+        # if self.saver == None:
+        #     raise Exception(
+        #         'Dependency injection error, please instantiate saver object first')
         self.saver().save(self.content, output_path, output_filename)

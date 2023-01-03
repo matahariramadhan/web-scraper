@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup, Tag
+from web_scraper.helper import list_to_hierarchical_dict
 
 
 class Parser(ABC):
@@ -16,7 +17,7 @@ class ShamelaParser(Parser):
     def __init__(self) -> None:
         self.page_number = ''
         self.hamesh = []
-        self.fihris = []
+        self.fihris = {}
         self.nass = []
 
     def __parse_hamesh(self, tag: Tag) -> None:
@@ -40,9 +41,10 @@ class ShamelaParser(Parser):
         fihrises = tag.find('div', class_='heading-title').find_all('a')
 
         if len(fihrises) != 0:
-            for i, f in enumerate(fihrises):
-                if i != 0:
-                    self.fihris.append(f.string)
+            content = []
+            for f in fihrises:
+                content.append(f.string)
+            self.fihris = list_to_hierarchical_dict(content)
 
     def __parse_nass(self, tag: Tag):
         nasses = tag.find('div', class_='nass').find_all('p')

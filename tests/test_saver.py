@@ -26,7 +26,7 @@ def xml():
 
 
 def test_xml_saver_can_save(dictionary, xml, tmp_path):
-    XMLSaver(dictionary, 'scraper').save(str(tmp_path))
+    XMLSaver().save(dictionary, str(tmp_path))
 
     actual = ''
     with pathlib.Path(tmp_path/'result.xml').open('r') as file:
