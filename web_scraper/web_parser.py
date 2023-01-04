@@ -16,21 +16,16 @@ class ShamelaParser(Parser):
 
     def __init__(self) -> None:
         self.page_number = ''
-        self.hamesh = []
+        self.hamesh = {}
         self.fihris = {}
         self.nass = []
 
     def __parse_hamesh(self, tag: Tag) -> None:
-        hameshs = tag.find_all('p', class_='hamesh')
+        hamesh = tag.find('p', class_='hamesh')
 
-        if len(hameshs) != 0:
-            for i, h in enumerate(hameshs):
-                if i == 0:
-                    self.hamesh.append(
-                        h.contents[0].string)
-                self.hamesh.append(
-                    h.find('br').string
-                )
+        self.hamesh[1] = hamesh.contents[0].string
+        for i, h in enumerate(hamesh.find_all('br')):
+            self.hamesh[i+2] = h.string
 
     def __parse_page_number(self, tag: Tag) -> None:
         page_number = tag.find(id='fld_goto_top')

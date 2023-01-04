@@ -32,3 +32,12 @@ class TestShamelaParser:
             }
         }
         assert actual == expected
+
+    def test_can_parse_hamesh(self, shamela_parser):
+        actual = shamela_parser.hamesh
+        expected = {
+            1: '(١) في كتابه أحكام القرآن (٣/ ٣٥١) .',
+            2: '(٢) الهداية شرح بداية المبتدي للإمام المرغيناني (١- ٢/ ٢٤٣) .'
+        }
+
+        assert actual == expected
