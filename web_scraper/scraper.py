@@ -24,7 +24,4 @@ class Scraper:
         return self
 
     def save(self, output_path: str, output_filename='result.xml') -> None:
-        # if self.saver == None:
-        #     raise Exception(
-        #         'Dependency injection error, please instantiate saver object first')
         self.saver().save(self.content, output_path, output_filename)

@@ -25,8 +25,9 @@ def list_to_hierarchical_dict(datas: list):
 def dict_to_xml(data: dict, parent) -> ET.Element:
     for key in data:
         if type(data[key]) is dict:
-            tag = ET.SubElement(parent, str(key))
+            tag = ET.SubElement(parent, str(key).replace(' ', '_'))
             dict_to_xml(data[key], tag)
         else:
-            tag = ET.SubElement(parent, str(key)).text = str(data[key])
+            tag = ET.SubElement(parent, str(key).replace(
+                ' ', '_')).text = str(data[key])
     return parent
