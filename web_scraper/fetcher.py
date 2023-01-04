@@ -22,5 +22,8 @@ class Fetcher:
 
     def extract_html(self, output_path: str, output_filename: str = 'result.html') -> None:
         '''Save self.markup to output_path/output_filename.html (result.html by default)'''
+        if self.markup == '':
+            raise Exception('Please fetch the html first before extracting it')
+
         with pathlib.Path(output_path+'/'+output_filename).open('wb') as file:
             file.write(self.markup)
