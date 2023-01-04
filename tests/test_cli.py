@@ -5,7 +5,7 @@ from cli import scrape
 
 @pytest.fixture
 def xml_sample():
-    with pathlib.Path('samples/result.xml').open('r') as file:
+    with pathlib.Path('tests/samples/result.xml').open('r') as file:
         return file.read()
 
 
