@@ -18,7 +18,7 @@ class ShamelaParser(Parser):
         self.page_number = ''
         self.hamesh = {}
         self.fihris = {}
-        self.nass = []
+        self.nass = {}
 
     def __parse_hamesh(self, tag: Tag) -> None:
         hamesh = tag.find('p', class_='hamesh')
@@ -47,7 +47,7 @@ class ShamelaParser(Parser):
         if len(nasses) != 0:
             for i, n in enumerate(nasses):
                 if i != len(nasses)-1:
-                    self.nass.append(str(n))
+                    self.nass[i+1] = str(n)
 
     def parse_content(self, markup: bytes | str) -> dict:
         soup = BeautifulSoup(markup, 'html.parser')
