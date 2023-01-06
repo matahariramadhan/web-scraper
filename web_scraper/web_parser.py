@@ -50,6 +50,7 @@ class ShamelaParser(Parser):
                     self.nass[i+1] = str(n)
 
     def parse_content(self, markup: bytes | str) -> dict:
+        '''Retrun dict of parsed content'''
         soup = BeautifulSoup(markup, 'html.parser')
         content = soup.find('div', class_='nass').parent
 

@@ -2,7 +2,8 @@ from xml.etree import ElementTree as ET
 
 
 def list_to_hierarchical_dict(datas: list):
-    '''Convert list to hierarchical dictionary'''
+    '''Convert list to hierarchical dictionary.
+    example: [1,2,3] to {1:{2:'3'}}'''
 
     def recursive(data):
         d = {}
@@ -22,7 +23,8 @@ def list_to_hierarchical_dict(datas: list):
     return recursive(datas)
 
 
-def dict_to_xml(data: dict, parent) -> ET.Element:
+def dict_to_xml(data: dict, parent: ET.Element) -> ET.Element:
+    '''Convert dict to xml.etree element'''
     for key in data:
         if type(data[key]) is dict:
             tag = ET.SubElement(parent, str(key).replace(' ', '_'))
