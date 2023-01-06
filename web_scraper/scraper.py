@@ -2,7 +2,9 @@ from web_scraper import Fetcher, Parser, Saver
 
 
 class Scraper:
-    '''Abstract class (interface) of scraper'''
+    '''Scraper fetch data from internet then parse and save it.
+
+    Dependency: Fetcher, Parser, Saver'''
 
     def __init__(self, fetcher: Fetcher, parser: Parser, saver: Saver) -> None:
         self.fetcher = fetcher
@@ -12,6 +14,9 @@ class Scraper:
         self.content: dict = {}
 
     def fetch_from_internet(self, url: str):
+        '''Fetch data from internet then populate self.markup.
+
+        Return scraper object it self'''
         raw_html = self.fetcher().fetch_from_internet(url)
         self.markup = raw_html
         return self
@@ -20,8 +25,10 @@ class Scraper:
         pass
 
     def parse_content(self):
+        '''Take self.markup and parse the content then populate self.content.'''
         self.content = self.parser().parse_content(self.markup)
         return self
 
-    def save(self, output_path: str, output_filename='result.xml') -> None:
+    def save(self, output_path: str, output_filename: str = 'result') -> None:
+        '''Take self.content and save it to output_path'''
         self.saver().save(self.content, output_path, output_filename)
