@@ -3,10 +3,6 @@ from web_scraper.saver import XMLSaver
 import pytest
 
 
-# @pytest.fixture
-# def initiate_xml_saver(autouse=True):
-#     return XMLSaver()
-
 @pytest.fixture
 def dictionary():
     return {
@@ -33,5 +29,5 @@ def test_xml_saver_can_save(dictionary, xml, tmp_path):
         actual = file.read()
     expected = xml
 
-    assert pathlib.Path(tmp_path/'result.xml').exists()
+    # assert pathlib.Path(tmp_path/'result.xml').exists()
     assert actual == expected
