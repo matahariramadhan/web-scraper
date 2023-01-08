@@ -20,15 +20,10 @@ def url() -> str:
     return 'https://shamela.ws/book/23599/612'
 
 
-class MockRequests:
-    def get(self, markup):
-        self.content = markup
-        return self
-
-
-def test_can_fetch_html_content_from_url(markup, url, monkeypatch):
+def test_can_fetch_html_content_from_url(markup, url, monkeypatch, MockRequests):
     def mock_get(*args, **kwargs):
-        return MockRequests().get(markup)
+        MockRequests.status_code = 200
+        return MockRequests.get()
     monkeypatch.setattr(requests, 'get', mock_get)
 
     expected = markup

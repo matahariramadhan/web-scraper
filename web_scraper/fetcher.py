@@ -1,6 +1,6 @@
 import pathlib
 import requests
-from bs4 import BeautifulSoup
+from .validation import validate_url, validate_filepath
 
 
 class Fetcher:
@@ -11,11 +11,13 @@ class Fetcher:
     def __init__(self) -> None:
         self.markup = ''
 
+    @validate_url
     def fetch_from_internet(self, url) -> bytes:
         '''Return raw bytes of html and populate self.markup from internet'''
         self.markup = requests.get(url).content
         return self.markup
 
+    @validate_filepath
     def fetch_from_local(self, path: str) -> bytes:
         '''Return raw bytes of html and populate self.markup from local'''
         with pathlib.Path(path).open('rb') as file:
