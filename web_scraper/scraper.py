@@ -21,8 +21,10 @@ class Scraper:
         self.markup = raw_html
         return self
 
-    def fetch_from_local(self):
-        pass
+    def fetch_from_local(self, path: str):
+        raw_html = self.fetcher().fetch_from_local(path)
+        self.markup = raw_html
+        return self
 
     def parse_content(self):
         '''Take self.markup and parse the content then populate self.content.'''
