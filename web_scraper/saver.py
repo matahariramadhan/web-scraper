@@ -14,7 +14,7 @@ class Saver(ABC):
 class XMLSaver(Saver):
     '''Saver to save to .xml file'''
 
-    def save(self, content: dict, output_path: str, output_filename: str = 'result', root: str = 'scraper'):
+    def save(self, content: dict, output_path: str, output_filename: str = 'result', root: str = 'scraper') -> None:
         root = ET.Element(root)
         root = dict_to_xml(content, root)
         tree = ET.ElementTree(root)
